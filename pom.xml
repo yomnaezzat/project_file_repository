@@ -57,4 +57,116 @@
         </pluginManagement>
     </build>
 
+    <profiles>
+        <!-- Profile for running Eureka Server -->
+        <profile>
+            <id>eureka</id>
+            <properties>
+                <spring.boot.mainclass>com.filerepository.eureka.EurekaServerApplication</spring.boot.mainclass>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>${spring.boot.mainclass}</mainClass>
+                            <folders>
+                                <folder>eureka-server</folder>
+                            </folders>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile for running API Gateway -->
+        <profile>
+            <id>gateway</id>
+            <properties>
+                <spring.boot.mainclass>com.filerepository.apigateway.ApiGatewayApplication</spring.boot.mainclass>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>${spring.boot.mainclass}</mainClass>
+                            <folders>
+                                <folder>api-gateway</folder>
+                            </folders>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile for running User Service -->
+        <profile>
+            <id>user</id>
+            <properties>
+                <spring.boot.mainclass>com.filerepository.userservice.UserServiceApplication</spring.boot.mainclass>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>${spring.boot.mainclass}</mainClass>
+                            <folders>
+                                <folder>user-service</folder>
+                            </folders>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile for running File Service -->
+        <profile>
+            <id>file</id>
+            <properties>
+                <spring.boot.mainclass>com.filerepository.fileservice.FileServiceApplication</spring.boot.mainclass>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>${spring.boot.mainclass}</mainClass>
+                            <folders>
+                                <folder>file-service</folder>
+                            </folders>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile for running Repository Service -->
+        <profile>
+            <id>repository</id>
+            <properties>
+                <spring.boot.mainclass>com.filerepository.repositoryservice.RepositoryServiceApplication</spring.boot.mainclass>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <mainClass>${spring.boot.mainclass}</mainClass>
+                            <folders>
+                                <folder>repository-service</folder>
+                            </folders>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
