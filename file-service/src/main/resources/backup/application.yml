@@ -1,13 +1,13 @@
 server:
-  port: 8083
+  port: 8082
 
 spring:
   application:
-    name: repository-service
+    name: file-service
   datasource:
-    url: jdbc:mysql://localhost:3306/file_repository_repos?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/project_file_repository?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
     username: root
-    password: root
+    password: MySql@2025!Dev
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -17,6 +17,11 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
 
 eureka:
   client:
@@ -26,12 +31,13 @@ eureka:
     fetch-registry: true
   instance:
     preferIpAddress: true
-    hostname: localhost
-    instanceId: ${spring.application.name}:${random.value}
+
+file:
+  upload-dir: ./uploads/files
 
 springdoc:
   api-docs:
-    path: /v3/api-docs
+    path: /file-service/v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
     operations-sorter: method
@@ -39,4 +45,4 @@ springdoc:
 logging:
   level:
     com.filerepository: DEBUG
-    org.springframework.web: DEBUG
+    org.springframework.web: INFO

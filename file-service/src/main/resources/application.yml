@@ -31,13 +31,15 @@ eureka:
     fetch-registry: true
   instance:
     preferIpAddress: true
+    hostname: localhost
+    instanceId: ${spring.application.name}:${random.value}
 
 file:
   upload-dir: ./uploads/files
 
 springdoc:
   api-docs:
-    path: /file-service/v3/api-docs
+    path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
     operations-sorter: method
@@ -45,4 +47,4 @@ springdoc:
 logging:
   level:
     com.filerepository: DEBUG
-    org.springframework.web: INFO
+    org.springframework.web: DEBUG

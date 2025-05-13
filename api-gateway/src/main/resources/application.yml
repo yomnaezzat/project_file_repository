@@ -10,31 +10,57 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        - id: user-service-public
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/login,/api/users/register
+        - id: user-service-protected
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+        - id: file-service-protected
+          uri: lb://file-service
+          predicates:
+            - Path=/api/files/**
+        - id: repository-service-protected
+          uri: lb://repository-service
+          predicates:
+            - Path=/api/repositories/**,/api/comments/**
+        - id: user-service-docs
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/v3/api-docs/**
+        - id: file-service-docs
+          uri: lb://file-service
+          predicates:
+            - Path=/file-service/v3/api-docs/**
+        - id: repository-service-docs
+          uri: lb://repository-service
+          predicates:
+            - Path=/repository-service/v3/api-docs/**
+        - id: swagger-ui
+          uri: lb://api-gateway
+          predicates:
+            - Path=/swagger-ui/**
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
   instance:
     preferIpAddress: true
+    hostname: localhost
 
 jwt:
   secret: thisissecretkeyforfilerepositoryprojectmicroserviceswithjwt
-  expiration: 86400000 # 24 hours in milliseconds
+  expiration: 86400000
 
 logging:
   level:
-    org.springframework.cloud.gateway: INFO
-    org.springframework.security: INFO
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
     com.filerepository: DEBUG
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    urls:
-      - name: User Service
-        url: /user-service/v3/api-docs
-      - name: File Service
-        url: /file-service/v3/api-docs
-      - name: Repository Service
-        url: /repository-service/v3/api-docs
+    org.springframework.web.reactive: DEBUG

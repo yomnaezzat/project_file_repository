@@ -20,31 +20,31 @@ public class RouteConfig {
         return builder.routes()
                 .route("user-service-public", r -> r
                         .path("/api/users/login", "/api/users/register")
-                        .uri("lb://USER-SERVICE"))
+                        .uri("lb://user-service"))
                 .route("user-service-protected", r -> r
                         .path("/api/users/**")
                         .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
-                        .uri("lb://USER-SERVICE"))
+                        .uri("lb://user-service"))
                 .route("file-service-protected", r -> r
                         .path("/api/files/**")
                         .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
-                        .uri("lb://FILE-SERVICE"))
+                        .uri("lb://file-service"))
                 .route("repository-service-protected", r -> r
                         .path("/api/repositories/**", "/api/comments/**")
                         .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
-                        .uri("lb://REPOSITORY-SERVICE"))
+                        .uri("lb://repository-service"))
                 .route("user-service-docs", r -> r
                         .path("/user-service/v3/api-docs/**")
-                        .uri("lb://USER-SERVICE"))
+                        .uri("lb://user-service"))
                 .route("file-service-docs", r -> r
                         .path("/file-service/v3/api-docs/**")
-                        .uri("lb://FILE-SERVICE"))
+                        .uri("lb://file-service"))
                 .route("repository-service-docs", r -> r
                         .path("/repository-service/v3/api-docs/**")
-                        .uri("lb://REPOSITORY-SERVICE"))
+                        .uri("lb://repository-service"))
                 .route("swagger-ui", r -> r
                         .path("/swagger-ui/**")
-                        .uri("lb://API-GATEWAY"))
+                        .uri("lb://api-gateway"))
                 .build();
     }
 }
