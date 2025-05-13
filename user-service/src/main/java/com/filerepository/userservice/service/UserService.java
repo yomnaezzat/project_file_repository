@@ -102,6 +102,11 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
     }
 
+    @Audited(action = "CHECK_USER_EXISTS", resource = "USER")
+    public boolean checkUserExists(Long id) {
+        return userRepository.existsById(id);
+    }
+
     @Audited(action = "GET_USERS", resource = "USER")
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()

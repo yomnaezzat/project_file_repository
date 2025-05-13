@@ -48,6 +48,16 @@ public class FileService {
     @LogExecutionTime
     @Transactional
     public FileUploadResponse uploadFile(MultipartFile file, Long repositoryId, Long folderId, Long uploaderId, String description) {
+        // First, check if the repository exists in the repository service
+        log.info("Validating repository existence with ID: {}", repositoryId);
+        boolean repositoryExists = repositoryServiceClient.checkRepositoryExists(repositoryId);
+        
+        if (!repositoryExists) {
+            log.error("Cannot upload file, repository with ID {} does not exist", repositoryId);
+            throw new IllegalArgumentException("Repository does not exist: " + repositoryId);
+        }
+        
+        log.info("Repository validation successful, proceeding with file upload");
         String storedFilename = fileStorageService.storeFile(file);
         UserDTO uploader = userServiceClient.getUserById(uploaderId);
 

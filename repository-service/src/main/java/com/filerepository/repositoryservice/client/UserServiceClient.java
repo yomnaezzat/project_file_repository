@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "user-service")
+@FeignClient(name = "user-service", fallbackFactory = UserServiceClientFallback.class)
 public interface UserServiceClient {
     
     @GetMapping("/api/users/{id}")
@@ -14,6 +14,6 @@ public interface UserServiceClient {
     @GetMapping("/api/users/username/{username}")
     UserDTO getUserByUsername(@PathVariable String username);
     
-    @GetMapping("/api/users/supervisors")
-    java.util.List<UserDTO> getAllSupervisors();
+    @GetMapping("/api/users/exists/{id}")
+    boolean checkUserExists(@PathVariable Long id);
 }

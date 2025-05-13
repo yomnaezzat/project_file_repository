@@ -37,6 +37,28 @@ public class RepositoryService {
     @LogExecutionTime
     @Transactional
     public RepositoryResponse createRepository(RepositoryRequest request) {
+        log.info("Validating owner existence with ID: {}", request.getOwnerId());
+        
+        // Validate that the owner exists in the user service
+        boolean ownerExists = userServiceClient.checkUserExists(request.getOwnerId());
+        if (!ownerExists) {
+            log.error("Cannot create repository, owner with ID {} does not exist", request.getOwnerId());
+            throw new IllegalArgumentException("Owner does not exist: " + request.getOwnerId());
+        }
+        
+        // Validate that all supervisors exist in the user service
+        if (request.getSupervisorIds() != null && !request.getSupervisorIds().isEmpty()) {
+            log.info("Validating supervisor existence");
+            for (Long supervisorId : request.getSupervisorIds()) {
+                boolean supervisorExists = userServiceClient.checkUserExists(supervisorId);
+                if (!supervisorExists) {
+                    log.error("Cannot create repository, supervisor with ID {} does not exist", supervisorId);
+                    throw new IllegalArgumentException("Supervisor does not exist: " + supervisorId);
+                }
+            }
+        }
+        
+        log.info("User validation successful, proceeding with repository creation");
         RepositoryEntity repositoryEntity = RepositoryEntity.builder()
                 .name(request.getName())
                 .description(request.getDescription())

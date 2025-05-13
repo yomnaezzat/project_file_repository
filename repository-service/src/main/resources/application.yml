@@ -17,6 +17,10 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
 
 eureka:
   client:
