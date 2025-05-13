@@ -82,6 +82,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         // Define public endpoints that don't require authentication
         return path.contains("/api/users/login") ||
                 path.contains("/api/users/register") ||
+                path.contains("/api/v1/auth/login") ||
+                path.contains("/api/v1/auth/register") ||
                 path.contains("/api-docs") ||
                 path.contains("/swagger") ||
                 path.contains("/webjars") ||
