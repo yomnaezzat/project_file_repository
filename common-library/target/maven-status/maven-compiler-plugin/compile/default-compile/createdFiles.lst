@@ -1,0 +1,10 @@
+com\filerepository\common\model\AuditLog.class
+com\filerepository\common\dto\FileDTO.class
+com\filerepository\common\aspect\PerformanceMonitoringAspect.class
+com\filerepository\common\dto\UserDTO$UserDTOBuilder.class
+com\filerepository\common\model\AuditLog$AuditLogBuilder.class
+com\filerepository\common\annotation\Audited.class
+com\filerepository\common\dto\UserDTO.class
+com\filerepository\common\annotation\LogExecutionTime.class
+com\filerepository\common\aspect\LoggingAspect.class
+com\filerepository\common\dto\FileDTO$FileDTOBuilder.class
