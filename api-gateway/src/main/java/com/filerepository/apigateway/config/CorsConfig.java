@@ -14,7 +14,7 @@ public class CorsConfig {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
+        corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://192.168.1.4:8080", "http://192.168.1.4:8083", "*"));
         corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfig.setAllowedHeaders(Arrays.asList("*"));
         corsConfig.setMaxAge(3600L);

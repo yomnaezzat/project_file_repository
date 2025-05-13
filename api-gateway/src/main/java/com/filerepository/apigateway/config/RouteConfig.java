@@ -18,6 +18,9 @@ public class RouteConfig {
     @Bean
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
+                .route("auth-service-public", r -> r
+                        .path("/api/v1/auth/**")
+                        .uri("lb://user-service"))
                 .route("user-service-public", r -> r
                         .path("/api/users/login", "/api/users/register")
                         .uri("lb://user-service"))
